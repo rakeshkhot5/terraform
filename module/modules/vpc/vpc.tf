@@ -22,12 +22,12 @@ resource "aws_internet_gateway" "igw" {
 resource "aws_subnet" "public" {
   count                   = length(var.public_subnets_cidr)
   vpc_id                  = var.vpc_id
-  cidr_block              = element(var.public_subnets_cidr,count.index)
+  cidr_block              = element(var.public_subnets_cidr, count.index)
   map_public_ip_on_launch = "true"
-  availability_zone       = element(var.azs,count.index)
+  availability_zone       = element(var.azs, count.index)
 
   tags = {
-    Name = "public-${count.index+1}-subnet"
+    Name = "public-${count.index + 1}-subnet"
   }
 }
 
@@ -36,11 +36,11 @@ resource "aws_subnet" "public" {
 resource "aws_subnet" "private" {
   count             = length(var.private_subnets_cidr)
   vpc_id            = var.vpc_id
-  cidr_block        = element(var.private_subnets_cidr,count.index)
-  availability_zone = element(var.azs,count.index)
+  cidr_block        = element(var.private_subnets_cidr, count.index)
+  availability_zone = element(var.azs, count.index)
 
   tags = {
-    Name = "private-${count.index+1}-subnet"
+    Name = "private-${count.index + 1}-subnet"
   }
 }
 
@@ -74,14 +74,14 @@ resource "aws_route_table" "private_rt" {
 # Route table association with private subnets
 resource "aws_route_table_association" "private" {
   count          = length(var.private_subnets_cidr)
-  subnet_id      = element(aws_subnet.private.*.id,count.index)
+  subnet_id      = element(aws_subnet.private.*.id, count.index)
   route_table_id = aws_route_table.private_rt.id
 }
 
 # Route table association with public subnets
 resource "aws_route_table_association" "public" {
   count          = length(var.private_subnets_cidr)
-  subnet_id      = element(aws_subnet.public.*.id,count.index)
+  subnet_id      = element(aws_subnet.public.*.id, count.index)
   route_table_id = aws_route_table.public_rt.id
 }
 
@@ -93,5 +93,5 @@ resource "aws_eip" "eip" {
 
 resource "aws_nat_gateway" "nat_gateway" {
   allocation_id = var.nat_eip
-  subnet_id     = element(aws_subnet.public.*.id,0)
+  subnet_id     = element(aws_subnet.public.*.id, 0)
 }

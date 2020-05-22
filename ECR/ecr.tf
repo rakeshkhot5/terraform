@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "repo" {
-  name = "myrepo"
+  name                 = "myrepo"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -7,13 +7,13 @@ resource "aws_ecr_repository" "repo" {
   }
 
   tags {
-      name = "myrepo"
+    name = "myrepo"
   }
 }
 
 ## for untagged images
 resource "aws_ecr_lifecycle_policy" "foopolicy" {
-repository = aws_ecr_repository.repo.name
+  repository = aws_ecr_repository.repo.name
 
   policy = <<EOF
 {
@@ -39,7 +39,7 @@ EOF
 
 ##for tagged image
 resource "aws_ecr_lifecycle_policy" "mypolicy" {
- repository = aws_ecr_repository.repo.name
+  repository = aws_ecr_repository.repo.name
 
   policy = <<EOF
 {

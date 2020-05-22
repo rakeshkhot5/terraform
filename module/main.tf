@@ -17,7 +17,7 @@ module "ec2-web" {
   ec2_key_name       = "windows"
   ec2_tag            = "web"
   web_subnet         = "${module.vpc.web_subnet}"
-  web_sg             =  "${module.vpc.web_sg}"
+  web_sg             = "${module.vpc.web_sg}"
 }
 
 
@@ -28,14 +28,14 @@ module "ec2-app" {
   ec2_key_name       = "windows"
   ec2_tag            = "app"
   app_subnet         = "${module.vpc.app_subnet}"
-  app_sg             =  "${module.vpc.app_sg}"
+  app_sg             = "${module.vpc.app_sg}"
 }
 
 
 module "rds" {
-  source             = "./modules/rds"
-  db_instance_class  = "db.t2.micro"
-  rds_subnet1         = "${module.vpc.rds_subnet1}"
-  rds_subnet2        = "${module.vpc.rds_subnet2}"
-  rds_sg             =  "${module.vpc.rds_sg}"
+  source            = "./modules/rds"
+  db_instance_class = "db.t2.micro"
+  rds_subnet1       = "${module.vpc.rds_subnet1}"
+  rds_subnet2       = "${module.vpc.rds_subnet2}"
+  rds_sg            = "${module.vpc.rds_sg}"
 }

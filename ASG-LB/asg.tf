@@ -9,7 +9,7 @@ resource "aws_autoscaling_group" "app_asg" {
   desired_capacity          = var.desired_capacity
   force_delete              = true
   default_cooldown          = 300
-  vpc_zone_identifier       = ["${element(aws_subnet.private.*.id,0)}", "${element(aws_subnet.private.*.id,1)}"]
+  vpc_zone_identifier       = ["${element(aws_subnet.private.*.id, 0)}", "${element(aws_subnet.private.*.id, 1)}"]
 
   tag {
     key                 = "Name"

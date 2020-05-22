@@ -3,6 +3,6 @@ variable "aws_region" {
 }
 
 variable "username" {
-  type = list(string)
+  type    = list(string)
   default = ["local", "qa", "stage"]
 }

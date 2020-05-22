@@ -23,7 +23,7 @@ resource "aws_alb" "my-alb" {
   ip_address_type                  = "ipv4"
   internal                         = "false"
   security_groups                  = ["${aws_security_group.my-alb-sg.id}"]
-  subnets                          = ["${element(aws_subnet.public.*.id,0)}", "${element(aws_subnet.public.*.id,1)}"]
+  subnets                          = ["${element(aws_subnet.public.*.id, 0)}", "${element(aws_subnet.public.*.id, 1)}"]
   enable_cross_zone_load_balancing = "true"
 
   tags = {
